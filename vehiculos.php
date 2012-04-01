@@ -18,12 +18,16 @@ if(isset($_POST['insertsubmit']))
 	$plazas = $_POST['plazas'];
 	$color = $_POST['color'];
 	$kilometros = $_POST['kilometros'];
-	$pvp = $_POST['pvp'];
+	$pvd = $_POST['pvd'];
 	$usoanterior = $_POST['usoanterior'];
 	$extras = $_POST['extras'];
+	$diamatric = $_POST['diamatric'];
+ 	$mesmatric = $_POST['mesmatric'];
+ 	$anomatric = $_POST['anomatric'];
+ 	$fechamatric = $anomatric."-".$mesmatric."-".$diamatric;
 
-	$query = mysql_query("INSERT INTO vehiculos (`matricula`, `marca`, `modelo`, `combustible`, `potencia`, `cilindrada`, `carroceria`, `plazas`, `color`, `kilometros`, `pvp`, `usoanterior`, `extras`, `fechainsercion`) 
-		VALUES ('$matricula', '$marca', '$modelo', '$combustible', '$potencia', '$cilindrada', '$carroceria', '$$plazas', '$color', '$kilometros', '$pvp', '$usoanterior', '$extras', '$fechainsercion')");
+	$query = mysql_query("INSERT INTO vehiculos (`matricula`,`fechamatric`, `marca`, `modelo`, `combustible`, `potencia`, `cilindrada`, `carroceria`, `plazas`, `color`, `kilometros`, `pvd`, `usoanterior`, `extras`, `fechainsercion`) 
+		VALUES ('$matricula', '$fechamatric', '$marca', '$modelo', '$combustible', '$potencia', '$cilindrada', '$carroceria', '$plazas', '$color', '$kilometros', '$pvd', '$usoanterior', '$extras', '$fechainsercion')");
 	
 
 	$vehiculo = mysql_insert_id(); 
@@ -83,18 +87,19 @@ else
 	echo "Num Puertas: <input name='carroceria' type='text'><br>";
 	echo "Plazas: <input name='plazas' type='text'><br>";
 	echo "Color: <input name='color' type='text'><br>";
+	echo "Fecha Matriculacion: <input type='text' size=2 maxlength='2' name='diamatric'><input type='text' size=4 maxlength='4' name='mesmatric'><input type='text' size=4 maxlength='4' name='anomatric'><br>";
 	echo "Kilometros: <input name='kilometros' type='text'><br>";
-	echo "PVP: <input name='pvp' type='text'><br>";
+	echo "Precio Salida: <input name='pvd' type='text'><br>";
 	echo "Uso Anterior: <input name='usoanterior' type='text'><br>";
 	echo "Extras: <input name='extras' type='text'><br>";
-	echo "Fecha Inicio Subasta: <input type='text' size=2 maxlength='2' name='dialimite'><input type='text' size=4 maxlength='4' name='meslimite'><input type='text' size=4 maxlength='4' name='anolimite'>
+	echo "Fecha Fin Subasta: <input type='text' size=2 maxlength='2' name='dialimite'><input type='text' size=4 maxlength='4' name='meslimite'><input type='text' size=4 maxlength='4' name='anolimite'><br>";
 
 	echo "<input type='submit' name='insertsubmit' value='Insertar'>";
 	echo "</form></p>";
 
 	echo "<table border='1'>";
 	echo "<tr><td colspan ='8' align='center'>Vehiculos Activos</td></tr>";
-	echo "<tr><td>Usuario</td><td>Borrar</td></tr>";	
+	echo "<tr><td>Matricula</td><td>Modelo</td><td>Borrar</td></tr>";	
 
 	$query = mysql_query("SELECT * FROM vehiculos");
 	$rows = mysql_num_rows($query);
@@ -104,12 +109,17 @@ else
 		$matricula = $vehiculosarray['matricula'];
 		$modelo = $vehiculosarray['modelo'];
 		$vid = $vehiculosarray['id'];
+
+		$sql = mysql_query("SELECT subasta FROM vehiculos WHERE id = '$vid'");
+		$rowvehiculo = mysql_fetch_row($sql);
+		$idsubasta = $rowvehiculo[0];
 				
 		echo "<tr>";
 		echo "<td>".$matricula."</td><td>".$modelo."</td>";
 		echo "<td>";
 		echo "<form method='post' action='?'>";
 		echo "<input type=hidden name='vid' value='$vid'>";
+		echo "<input type=hidden name='idsubasta' value='$idsubasta'>";
 		echo "<input type=submit name='deletesubmit' value='Borrar'>";
 		echo "</form>";
 		echo "</td>"; 			

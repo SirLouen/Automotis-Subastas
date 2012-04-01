@@ -58,7 +58,6 @@ else
 				echo "<hr>";
 
 			}
-		}
 
 		include("footer.php");
 	}

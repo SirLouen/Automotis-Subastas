@@ -9,6 +9,8 @@
 
  */
  
+error_reporting(0);
+
 include("config.php");
 include("include/gen_functions.php");
 include("lang/$lang.php");
@@ -142,9 +144,10 @@ if ( $_SESSION['nivelusuario'] >= 1 )
 			$matricula = $arrayvehiculo['matricula'];
 			
 			// PARA CARGAR IMAGENES ALTERNATIVAS
-			$folder_image_name = "/automotis/imagenes/$matricula/";
-		 $images_folder_path = $_SERVER['DOCUMENT_ROOT'].$folder_image_name;
-		 $url_to_folder = 'http://'.$_SERVER["SERVER_NAME"].$folder_image_name;
+			$folder_image_name = "/public_html/imagenes/$matricula/";
+		 	$basedir = dirname(dirname(__FILE__));
+			$images_folder_path = $basedir.$folder_image_name;
+		 	$url_to_folder = 'http://'.$_SERVER["SERVER_NAME"].$folder_image_name;
 		
 		 $images = array();
 		

@@ -62,7 +62,7 @@ else
 		echo "<td>".$nombre."</td>";
 		echo "<td>";
 		echo "<form method='post' action='?'>";
-		echo "<input type=hidden name='vid' value='$userid'>";
+		echo "<input type=hidden name='userid' value='$userid'>";
 		echo "<input type=submit name='deletesubmit' value='Borrar'>";
 		echo "</form>";
 		echo "</td>"; 			
