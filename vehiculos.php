@@ -39,8 +39,8 @@ if(isset($_POST['insertsubmit']))
  	
  	$activa = "1";
  	
- 	$sql = "INSERT INTO subastas (vehiculo, fechalimite, fechacreacion, activa)
-	 			VALUES ('$vehiculo', '$fechalimite', now(), '$activa')";
+ 	$sql = "INSERT INTO subastas (vehiculo, fechalimite, fechacreacion, activa, matricula)
+	 			VALUES ('$vehiculo', '$fechalimite', now(), '$activa', '$matricula')";
 	 	
 	if (!(mysql_query($sql,$conexion)))
 	{

@@ -29,8 +29,8 @@ if ($_SESSION['nivelusuario'] >= 5)
 	?>
 	
 		<table border="1" align="center">
-		<tr><td colspan ="5" align="center">Buscador de Subastas</td></tr>
-		<tr><td>Num Id</td><td>Fecha Creacion</td><td>Marca</td><td>Modelo</td><td>Estado</td></tr>
+		<tr><td colspan ="6" align="center">Buscador de Subastas</td></tr>
+		<tr><td>Num Id</td><td>Fecha Creacion</td><td>Matricula</td><td>Marca</td><td>Modelo</td><td>Estado</td></tr>
 	
 		<?
 		$maxsubastas = 7;
@@ -53,6 +53,7 @@ if ($_SESSION['nivelusuario'] >= 5)
 			$vehiculo = $arraysubastas['vehiculo'];
 			$sql2 = mysql_query("SELECT * FROM vehiculos WHERE id = '$vehiculo'");
 			$arrayvehiculo = mysql_fetch_array($sql2);
+			echo "<td>".$arraysubastas['matricula']."</td>";
 			echo "<td>".$arrayvehiculo['marca']."</td>";
 			echo "<td>".$arrayvehiculo['modelo']."</td>";
 			echo "<td>".$activa."</td>";			
